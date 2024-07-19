@@ -9,7 +9,8 @@ A photo frame based on a 1.54 inch ePaper display with colors black red and whit
 
 ## Installation
 Arduino IDE 2.3.2 by Arduino with libraries
-- ...
+- Modification of Waveshare ePaper display library for ESP32 driver
+- ESP32 Arduino IDE board (https://github.com/espressif/arduino-esp32/tree/master/libraries/SD/src)
 
 ## Usage
 Please, refer to the documentation [Link >>](doc/Documentation.md).
