@@ -5,7 +5,7 @@ A photo frame based on a 1.54 inch ePaper display with colors black red and whit
 
 ## Visuals
 
-![Figure of Setup](img/3.1.gif)
+![Figure of Setup](img/default.JPG) ![Figure of Setup](img/3.1.gif)
 
 ## Installation
 Arduino IDE 2.3.2 by Arduino with libraries
