@@ -39,7 +39,7 @@ The photo frame has been build with the following IoT components:
 
 
 
-## software
+## Software
 
 The software was developped and uploaded with the Arduino IDE 2.3.2 by Arduino using the following libraries:
 
