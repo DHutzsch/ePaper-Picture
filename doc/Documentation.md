@@ -35,7 +35,7 @@ The photo frame has been build with the following IoT components:
 
 **Figure of the controls**
 
-<img src="../img/control.JPG" height="105">
+<img src="../img/back.JPG" height="105">
 
 
 
@@ -43,8 +43,26 @@ The photo frame has been build with the following IoT components:
 
 The software was developped and uploaded with the Arduino IDE 2.3.2 by Arduino using the following libraries:
 
-- ...
+- Modification of Waveshare ePaper display library for ESP32 driver
+- ESP32 Arduino IDE board (https://github.com/espressif/arduino-esp32/tree/master/libraries/SD/src)
+- ESP32-S2 Dev Module (selected board)
 
-The main code file is iot-si-balance.ino. The loop function implements a finite automate with different behaviour based on the function status (Measurement, Uncertainty, Adjustment 1&2). But basically, it is running updates of the display and checking inputs from the buttons. There is also a flag to set DEBUG mode that provide more data through the serial port. 
+The main code file is ePaper-Picture.ino. The loop function implements a finite automate with different behaviour based on the charging status of the battery (ACTIVE = battery full, CHARGE = request to chare device, STOPED = operation stoped). 
 
-The serial port is running on 115200 baude.
+When active, the loop through the images is running. Images are displayed using the Waveshare EPD library. It communicates with the display through the SPI interface. After each picture update, the display is set to sleep mode to prevent damage of the display (recommendation by Waveshare).
+
+
+
+In file EPD.ino methods for printing pictures on the display are implemented. The images are stored as C-Array data in the ImageData.c file.
+
+The InterruptHandler.ino contains the method handling the interrupt. The interrupt is listening to a pull-down event on GPIO 6.
+
+The file VoltageHandler.ino contains the method reading the voltage of the battery. It is running analogRead on GPIO 2. Three readings are made and the arithmetic mean is used as the voltage reference value. The ADC runs with a reference of 3.3 V. As the battery provides between 3.3 V and 4.2 V, the voltage of the battery must fist be reduced before reading it at GPIO 2. Here, a voltage devider with two 1 MOhm (mega ohm) resistors is used.
+
+```
++VCC (battery) o---------[1 MOhm]----+---------o GPIO2
+                                     |
+           GND o---------[1 MOhm]----+
+```
+           
+The serial port is running on 115200 baude. When the DEBUG_MODE is set true, information on the chargig status and operation status is outputted to the serial port.
